@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -20,15 +21,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import com.example.crudcomposepestanas.navigation.NavegationCliente
 import com.example.crudcomposepestanas.ui.theme.CrudComposePestanasTheme
+import com.example.crudcomposepestanas.view.ClienteViewModel
 
 class MainActivity : ComponentActivity() {
+    val viewModelCliente: ClienteViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             CrudComposePestanasTheme {
-                CrudComposePestanasApp()
+                NavegationCliente(viewModelCliente)
+                //CrudComposePestanasApp()
             }
         }
     }
