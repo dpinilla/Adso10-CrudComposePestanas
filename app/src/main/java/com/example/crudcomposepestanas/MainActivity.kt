@@ -18,31 +18,38 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import com.example.crudcomposepestanas.navigation.NavegationArticulo
 import com.example.crudcomposepestanas.navigation.NavegationCliente
 import com.example.crudcomposepestanas.ui.theme.CrudComposePestanasTheme
-import com.example.crudcomposepestanas.view.ClienteViewModel
+import com.example.crudcomposepestanas.view.articulo.ArticuloViewModel
+import com.example.crudcomposepestanas.view.cliente.ClienteViewModel
 
 class MainActivity : ComponentActivity() {
     val viewModelCliente: ClienteViewModel by viewModels()
+    val viewModelArticulo: ArticuloViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             CrudComposePestanasTheme {
-                NavegationCliente(viewModelCliente)
-                //CrudComposePestanasApp()
+                //NavegationCliente(viewModelCliente = viewModelCliente)
+                CrudComposePestanasApp(
+                    viewModelCliente,
+                    viewModelArticulo
+                )
             }
         }
     }
 }
 
-@PreviewScreenSizes
 @Composable
-fun CrudComposePestanasApp() {
-    var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
+fun CrudComposePestanasApp(
+    viewModelCliente: ClienteViewModel,
+    viewModelArticulo: ArticuloViewModel
+) {
+    var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.CLIENTE) }
 
     NavigationSuiteScaffold(
         navigationSuiteItems = {
@@ -61,11 +68,9 @@ fun CrudComposePestanasApp() {
             }
         }
     ) {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Greeting(
-                name = "Android",
-                modifier = Modifier.padding(innerPadding)
-            )
+        when(currentDestination){
+            AppDestinations.CLIENTE-> NavegationCliente(viewModelCliente = viewModelCliente)
+            AppDestinations.ARTICULO-> NavegationArticulo(viewModelArticulo = viewModelArticulo)
         }
     }
 }
@@ -74,23 +79,6 @@ enum class AppDestinations(
     val label: String,
     val icon: Int,
 ) {
-    HOME("Home", R.drawable.ic_home),
-    FAVORITES("Favorites", R.drawable.ic_favorite),
-    PROFILE("Profile", R.drawable.ic_account_box),
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CrudComposePestanasTheme {
-        Greeting("Android")
-    }
+    CLIENTE("Cliente", R.drawable.ic_cliente),
+    ARTICULO("Articulo", R.drawable.ic_articulo)
 }

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CrudComposePestanas</string>
+    <string name="cedula">Cédula</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="edad">Edad</string>
+    <string name="agregar">Agregar</string>
+    <string name="guardar">GUARDAR</string>
 </resources>

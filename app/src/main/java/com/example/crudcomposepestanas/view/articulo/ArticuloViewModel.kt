@@ -1,24 +1,26 @@
-package com.example.crudcomposepestanas.view
+package com.example.crudcomposepestanas.view.articulo
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.crudcomposepestanas.conexionService.ConexionArticulo
 import com.example.crudcomposepestanas.conexionService.ConexionCliente
+import com.example.crudcomposepestanas.model.ModelArticulo
 import com.example.crudcomposepestanas.model.ModelCliente
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class ClienteViewModel: ViewModel() {
-    private val _lista = MutableStateFlow<List<ModelCliente>>(emptyList())
-    val listaCliente: StateFlow<List<ModelCliente>> = _lista.asStateFlow()
-    val conexionCliente = ConexionCliente()
+class ArticuloViewModel: ViewModel() {
+    private val _lista = MutableStateFlow<List<ModelArticulo>>(emptyList())
+    val listaArticulo: StateFlow<List<ModelArticulo>> = _lista.asStateFlow()
+    val conexionArticulo = ConexionArticulo()
 
     fun visualiza(){
         viewModelScope.launch {
             try{
-                val datos = conexionCliente.consultaCliente()
+                val datos = conexionArticulo.consultaArticulo()
                 _lista.value = datos
             }
             catch (e: Exception){

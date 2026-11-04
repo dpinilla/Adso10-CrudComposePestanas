@@ -1,4 +1,4 @@
-package com.example.crudcomposepestanas.view
+package com.example.crudcomposepestanas.view.articulo
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,14 +11,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.crudcomposepestanas.view.cliente.ClienteViewModel
 
 @Composable
-fun ClienteScreen(
-    viewModelCliente: ClienteViewModel
+fun ArticuloScreen(
+    viewModelArticulo: ArticuloViewModel
 ){
-    val listaCliente by viewModelCliente.listaCliente.collectAsStateWithLifecycle()
+    val listaArticulo by viewModelArticulo.listaArticulo.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
-        viewModelCliente.visualiza()
+        viewModelArticulo.visualiza()
     }
     Scaffold() {MyPadding->
         LazyColumn(
@@ -26,7 +27,7 @@ fun ClienteScreen(
                 .fillMaxSize()
                 .padding(MyPadding)
         ) {
-            itemsIndexed(listaCliente){index, cliente->
+            itemsIndexed(listaArticulo){index, articulo->
                 Column() { }
             }
         }

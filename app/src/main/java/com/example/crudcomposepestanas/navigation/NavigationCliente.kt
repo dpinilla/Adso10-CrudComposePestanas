@@ -4,8 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.crudcomposepestanas.view.ClienteScreen
-import com.example.crudcomposepestanas.view.ClienteViewModel
+import com.example.crudcomposepestanas.view.cliente.ClienteScreen
+import com.example.crudcomposepestanas.view.cliente.ClienteViewModel
+import com.example.crudcomposepestanas.view.cliente.inserta.InsertaClienteScreen
 
 @Composable
 fun NavegationCliente(
@@ -18,9 +19,14 @@ fun NavegationCliente(
         startDestination = "cliente") {
         composable("cliente") {
             ClienteScreen(
-                viewModelCliente
+                viewModelCliente,
+                onGoInsertar = {navController.navigate("insertarCliente")}
             )
         }
-
+        composable(
+            "insertarCliente"
+        ) {
+            InsertaClienteScreen()
+        }
     }
 }
