@@ -17,4 +17,15 @@ class ConexionCliente{
             .from("cliente_adso_10")
             .insert(data)
     }
+
+    suspend fun consultaClienteId(cedula: String): ModelCliente{
+        return supabase
+            .from("cliente_adso_10")
+            .select(){
+                filter {
+                    eq("cedula", cedula)
+                }
+            }
+            .decodeSingle<ModelCliente>()
+    }
 }
