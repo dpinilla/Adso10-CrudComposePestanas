@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.crudcomposepestanas.R
 import com.example.crudcomposepestanas.model.ModelCliente
+import com.example.crudcomposepestanas.view.Espacio
 
 @Composable
 fun InsertaClienteScreen(){
@@ -42,40 +43,28 @@ fun InsertaClienteScreen(){
                 Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.cedula)) }
             )
-            Spacer(
-                Modifier
-                    .height(30.dp)
-            )
+            Espacio(30)
             TextField(
                 value = nombre,
                 onValueChange = {nombre = it},
                 Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.nombre)) }
             )
-            Spacer(
-                Modifier
-                    .height(30.dp)
-            )
+            Espacio(30)
             TextField(
                 value = apellido,
                 onValueChange = {apellido = it},
                 Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.apellido)) }
             )
-            Spacer(
-                Modifier
-                    .height(30.dp)
-            )
+            Espacio(30)
             TextField(
                 value = edad,
                 onValueChange = {edad = it},
                 Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.edad)) }
             )
-            Spacer(
-                Modifier
-                    .height(30.dp)
-            )
+            Espacio(30)
             Button(
                 onClick = {
                     insertaViewModel.guardar(ModelCliente(cedula,nombre, apellido, edad.toInt()))

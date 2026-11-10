@@ -28,4 +28,14 @@ class ConexionCliente{
             }
             .decodeSingle<ModelCliente>()
     }
+
+    suspend fun modificaCliente(data: ModelCliente){
+        supabase
+            .from("cliente_adso_10")
+            .update(data) {
+            filter {
+                eq("cedula", data.cedula!!)
+            }
+        }
+    }
 }

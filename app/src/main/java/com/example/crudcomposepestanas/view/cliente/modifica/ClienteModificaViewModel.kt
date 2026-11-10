@@ -19,11 +19,26 @@ class ClienteModificaViewModel(
     val dato: StateFlow<ModelCliente?> = _dato.asStateFlow()
     val conexionCliente = ConexionCliente()
 
+    init {
+        consultaClienteId(cedula)
+    }
+
     fun consultaClienteId(cedula: String){
         viewModelScope.launch {
             try{
                 val datos = conexionCliente.consultaClienteId(cedula)
                 _dato.value = datos
+            }
+            catch (e: Exception){
+                Log.e("errores", "error $e, nNo se pudo conectar al backend")
+            }
+        }
+    }
+
+    fun modificaCliente(data: ModelCliente){
+        viewModelScope.launch {
+            try{
+                conexionCliente.modificaCliente(data)
             }
             catch (e: Exception){
                 Log.e("errores", "error $e, nNo se pudo conectar al backend")
