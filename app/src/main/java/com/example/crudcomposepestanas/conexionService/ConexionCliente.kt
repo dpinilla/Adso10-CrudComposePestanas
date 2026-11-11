@@ -38,4 +38,14 @@ class ConexionCliente{
             }
         }
     }
+
+    suspend fun eliminaCliente(cedula:String){
+        supabase
+            .from("cliente_adso_10")
+            .delete {
+            filter {
+                eq("cedula", cedula)
+            }
+        }
+    }
 }

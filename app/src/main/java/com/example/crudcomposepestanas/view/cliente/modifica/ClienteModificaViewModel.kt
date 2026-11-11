@@ -45,4 +45,15 @@ class ClienteModificaViewModel(
             }
         }
     }
+
+    fun eliminaCliente(cedula: String){
+        viewModelScope.launch {
+            try{
+                conexionCliente.eliminaCliente(cedula)
+            }
+            catch (e: Exception){
+                Log.e("errores", "error $e, nNo se pudo conectar al backend")
+            }
+        }
+    }
 }
